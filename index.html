@@ -1,0 +1,3075 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#09060b">
+
+<title>For Her — 21</title>
+
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;500;600&family=DM+Sans:wght@300;400;500;600&display=swap');
+
+:root {
+    --bg: #09060b;
+    --ink: #fff7fa;
+    --muted: #bcaeb6;
+    --rose: #f18cab;
+    --line: rgba(255,255,255,.10);
+    --glass: rgba(255,255,255,.045);
+    --serif: "Cormorant Garamond", Georgia, serif;
+    --sans: "DM Sans", Arial, sans-serif;
+}
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    background: var(--bg);
+    color: var(--ink);
+    font-family: var(--sans);
+    overflow-x: hidden;
+}
+
+body.lock {
+    overflow: hidden;
+}
+
+/* =========================
+   BACKGROUND
+========================= */
+
+.noise {
+    position: fixed;
+    inset: 0;
+    z-index: 100;
+    pointer-events: none;
+    opacity: .035;
+    background-image:
+    url("data:image/svg+xml,%3Csvg viewBox='0 0 180 180' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='.65'/%3E%3C/svg%3E");
+}
+
+#particles {
+    position: fixed;
+    inset: 0;
+    pointer-events: none;
+    z-index: 1;
+}
+
+.particle {
+    position: absolute;
+    border-radius: 50%;
+    background: #ffd9e5;
+    opacity: .35;
+    animation: float linear infinite;
+}
+
+@keyframes float {
+    to {
+        transform: translate3d(var(--x), -110vh, 0) scale(.3);
+        opacity: 0;
+    }
+}
+
+/* =========================
+   INTRO
+========================= */
+
+.intro {
+    position: fixed;
+    inset: 0;
+    background: #070509;
+    z-index: 9999;
+    display: grid;
+    place-items: center;
+    transition: 1.3s cubic-bezier(.77,0,.18,1);
+}
+
+.intro.out {
+    transform: translateY(-100%);
+    opacity: 0;
+}
+
+.intro::after {
+    content: "";
+    position: absolute;
+    width: 70vw;
+    height: 70vw;
+    max-width: 850px;
+    max-height: 850px;
+    background: radial-gradient(
+        circle,
+        rgba(179,67,105,.20),
+        transparent 65%
+    );
+    filter: blur(25px);
+}
+
+.intro-inner {
+    position: relative;
+    z-index: 2;
+    text-align: center;
+}
+
+.kicker {
+    font-size: 10px;
+    letter-spacing: 6px;
+    text-transform: uppercase;
+    color: #aa919e;
+}
+
+.big21 {
+    font-family: var(--serif);
+    font-size: min(42vw,390px);
+    font-weight: 300;
+    line-height: .72;
+    letter-spacing: -.06em;
+
+    background: linear-gradient(
+        130deg,
+        #fff,
+        #d995ae 48%,
+        #fff
+    );
+
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+
+    filter: drop-shadow(
+        0 30px 70px rgba(235,125,164,.12)
+    );
+}
+
+.intro-sub {
+    font-family: var(--serif);
+    font-size: clamp(26px,4vw,48px);
+    margin-top: 34px;
+}
+
+.enter {
+    margin-top: 48px;
+    padding: 15px 28px;
+
+    border: 1px solid rgba(255,255,255,.18);
+    border-radius: 100px;
+
+    background: rgba(255,255,255,.045);
+    color: #fff;
+
+    letter-spacing: 3px;
+    font-size: 10px;
+    cursor: pointer;
+
+    transition: .4s;
+    backdrop-filter: blur(20px);
+}
+
+.enter:hover {
+    background: #fff;
+    color: #170b12;
+    transform: translateY(-3px);
+    box-shadow: 0 15px 50px rgba(241,140,171,.18);
+}
+
+/* =========================
+   NAV
+========================= */
+
+.topbar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+
+    height: 78px;
+    z-index: 90;
+
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    padding: 0 5%;
+
+    background:
+        linear-gradient(
+            #09060bdd,
+            transparent
+        );
+
+    pointer-events: none;
+}
+
+.brand {
+    font-family: var(--serif);
+    font-size: 25px;
+}
+
+.topdate {
+    font-size: 9px;
+    letter-spacing: 4px;
+    color: #9d8992;
+}
+
+.music {
+    pointer-events: auto;
+
+    width: 44px;
+    height: 44px;
+
+    border-radius: 50%;
+
+    border: 1px solid var(--line);
+
+    color: #fff;
+
+    background: #100a11cc;
+
+    backdrop-filter: blur(15px);
+
+    cursor: pointer;
+}
+
+/* =========================
+   SECTIONS
+========================= */
+
+main {
+    position: relative;
+    z-index: 2;
+}
+
+section {
+    min-height: 100vh;
+
+    padding: 130px 7%;
+
+    position: relative;
+
+    display: grid;
+    place-items: center;
+
+    overflow: hidden;
+}
+
+/* =========================
+   HERO
+========================= */
+
+.hero {
+    min-height: 100svh;
+
+    background:
+        radial-gradient(
+            circle at 50% 43%,
+            rgba(161,47,87,.25),
+            transparent 30%
+        ),
+
+        radial-gradient(
+            circle at 20% 80%,
+            rgba(74,39,76,.18),
+            transparent 30%
+        );
+}
+
+.orbit {
+    position: absolute;
+
+    width: min(70vw,760px);
+    height: min(70vw,760px);
+
+    border: 1px solid rgba(255,255,255,.055);
+
+    border-radius: 50%;
+
+    animation: spin 28s linear infinite;
+}
+
+.orbit::before,
+.orbit::after {
+    content: "";
+
+    position: absolute;
+
+    border-radius: 50%;
+
+    background: #f5c0d2;
+
+    box-shadow: 0 0 25px #e98dab;
+}
+
+.orbit::before {
+    width: 6px;
+    height: 6px;
+
+    top: 7%;
+    left: 25%;
+}
+
+.orbit::after {
+    width: 4px;
+    height: 4px;
+
+    bottom: 15%;
+    right: 16%;
+}
+
+.orbit2 {
+    width: min(48vw,520px);
+    height: min(48vw,520px);
+
+    animation:
+        spin 19s linear reverse;
+
+    border-color:
+        rgba(255,255,255,.035);
+}
+
+@keyframes spin {
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+.hero-content {
+    text-align: center;
+
+    position: relative;
+    z-index: 2;
+}
+
+.hero-eyebrow {
+    font-size: 10px;
+    letter-spacing: 6px;
+
+    color: #a8919a;
+
+    text-transform: uppercase;
+}
+
+.hero-title {
+    font-family: var(--serif);
+
+    font-size: clamp(
+        72px,
+        13vw,
+        175px
+    );
+
+    font-weight: 300;
+
+    line-height: .75;
+
+    margin-top: 28px;
+
+    letter-spacing: -.055em;
+}
+
+.hero-title em {
+    font-style: italic;
+    color: #e5a0b8;
+}
+
+.hero-copy {
+    margin: 36px auto 0;
+
+    max-width: 510px;
+
+    color: #b9aab1;
+
+    line-height: 1.8;
+
+    font-size: 14px;
+}
+
+.down {
+    position: absolute;
+
+    bottom: 30px;
+
+    display: flex;
+
+    gap: 12px;
+
+    align-items: center;
+
+    color: #776870;
+
+    font-size: 9px;
+
+    letter-spacing: 4px;
+}
+
+.down span {
+    width: 35px;
+    height: 1px;
+
+    background: #5e4c55;
+}
+
+/* =========================
+   GENERAL
+========================= */
+
+.chapter {
+    display: block;
+    text-align: center;
+}
+
+.eyebrow {
+    font-size: 9px;
+
+    letter-spacing: 5px;
+
+    color: #b88b9d;
+
+    text-transform: uppercase;
+}
+
+.title {
+    font-family: var(--serif);
+
+    font-size: clamp(
+        55px,
+        8vw,
+        105px
+    );
+
+    font-weight: 400;
+
+    line-height: .9;
+
+    margin-top: 18px;
+}
+
+.lead {
+    max-width: 620px;
+
+    margin: 28px auto 0;
+
+    color: #afa1a8;
+
+    font-size: 14px;
+
+    line-height: 1.9;
+}
+
+/* reveal animation */
+
+.reveal {
+    opacity: 0;
+
+    transform: translateY(45px);
+
+    transition:
+        1s cubic-bezier(.2,.75,.2,1);
+}
+
+.reveal.show {
+    opacity: 1;
+
+    transform: none;
+}
+
+/* =========================
+   MEMORIES
+========================= */
+
+.memories {
+    background:
+        linear-gradient(
+            #09060b,
+            #0e080d
+        );
+}
+
+.memory-wrap {
+    width: 100%;
+
+    max-width: 1200px;
+
+    margin: 65px auto 0;
+
+    display: grid;
+
+    grid-template-columns:
+        1.2fr .8fr;
+
+    gap: 18px;
+}
+
+.photo {
+    position: relative;
+
+    min-height: 560px;
+
+    border-radius: 6px;
+
+    overflow: hidden;
+
+    background: #171016;
+
+    border:
+        1px solid rgba(255,255,255,.08);
+}
+
+.photo.small {
+    min-height: 270px;
+}
+
+.photo img {
+    width: 100%;
+    height: 100%;
+
+    object-fit: cover;
+
+    position: absolute;
+    inset: 0;
+
+    transition: 1s;
+
+    filter: saturate(.82);
+}
+
+.photo:hover img {
+    transform: scale(1.05);
+
+    filter: saturate(1);
+}
+
+.photo::after {
+    content: "";
+
+    position: absolute;
+    inset: 0;
+
+    background:
+        linear-gradient(
+            transparent 50%,
+            rgba(0,0,0,.78)
+        );
+}
+
+.photo-label {
+    position: absolute;
+
+    z-index: 2;
+
+    left: 28px;
+    bottom: 25px;
+
+    text-align: left;
+}
+
+.photo-label small {
+    display: block;
+
+    color: #c9a8b5;
+
+    font-size: 9px;
+
+    letter-spacing: 3px;
+
+    text-transform: uppercase;
+
+    margin-bottom: 7px;
+}
+
+.photo-label strong {
+    font-family: var(--serif);
+
+    font-size: 28px;
+
+    font-weight: 400;
+}
+
+.right-photos {
+    display: grid;
+
+    grid-template-rows:
+        1fr 1fr;
+
+    gap: 18px;
+}
+
+/* =========================
+   21 REASONS
+========================= */
+
+.reasons {
+    background: #0b070a;
+}
+
+.reason-head {
+    width: 100%;
+    max-width: 1200px;
+}
+
+.reason-stage {
+    width: 100%;
+
+    max-width: 1200px;
+
+    margin-top: 55px;
+
+    display: grid;
+
+    grid-template-columns:
+        240px 1fr;
+
+    gap: 30px;
+
+    align-items: stretch;
+}
+
+.reason-nav {
+    display: flex;
+
+    flex-direction: column;
+
+    gap: 7px;
+
+    max-height: 580px;
+
+    overflow: auto;
+
+    padding-right: 8px;
+}
+
+.reason-nav button {
+    text-align: left;
+
+    padding: 12px 14px;
+
+    background: transparent;
+
+    color: #796a71;
+
+    border: 1px solid transparent;
+
+    cursor: pointer;
+
+    font: 11px var(--sans);
+
+    border-radius: 8px;
+
+    transition: .25s;
+}
+
+.reason-nav button.active,
+.reason-nav button:hover {
+    color: #f7e8ed;
+
+    border-color: var(--line);
+
+    background: var(--glass);
+}
+
+.reason-card {
+    min-height: 580px;
+
+    border:
+        1px solid var(--line);
+
+    border-radius: 14px;
+
+    background:
+        radial-gradient(
+            circle at 80% 20%,
+            rgba(219,120,151,.13),
+            transparent 35%
+        ),
+
+        rgba(255,255,255,.025);
+
+    padding: 65px;
+
+    display: flex;
+
+    flex-direction: column;
+
+    justify-content: space-between;
+
+    text-align: left;
+
+    box-shadow:
+        0 30px 100px rgba(0,0,0,.2);
+}
+
+.reason-num {
+    font-family: var(--serif);
+
+    font-size: 120px;
+
+    line-height: .7;
+
+    color: rgba(237,170,192,.17);
+}
+
+.reason-card h3 {
+    font-family: var(--serif);
+
+    font-size: clamp(
+        38px,
+        5vw,
+        68px
+    );
+
+    font-weight: 400;
+
+    max-width: 650px;
+}
+
+.reason-card p {
+    color: #b9abb2;
+
+    line-height: 1.8;
+
+    max-width: 620px;
+
+    font-size: 15px;
+
+    margin-top: 15px;
+}
+
+.reason-progress {
+    height: 1px;
+
+    background: #30272c;
+
+    margin-top: 30px;
+
+    position: relative;
+}
+
+.reason-progress span {
+    position: absolute;
+
+    left: 0;
+    top: 0;
+
+    height: 1px;
+
+    background: #e4a2b8;
+
+    width: 0;
+
+    transition: .5s;
+}
+
+/* =========================
+   DISTANCE
+========================= */
+
+.distance {
+    background:
+        radial-gradient(
+            circle at center,
+            #160b13,
+            #09060b 62%
+        );
+}
+
+.distance-inner {
+    width: 100%;
+
+    max-width: 1100px;
+
+    text-align: center;
+}
+
+.map {
+    height: 430px;
+
+    margin-top: 65px;
+
+    border:
+        1px solid var(--line);
+
+    border-radius: 20px;
+
+    position: relative;
+
+    overflow: hidden;
+
+    background:
+
+        radial-gradient(
+            circle at 16% 52%,
+            rgba(239,148,175,.15),
+            transparent 3%
+        ),
+
+        radial-gradient(
+            circle at 84% 52%,
+            rgba(239,148,175,.15),
+            transparent 3%
+        ),
+
+        repeating-linear-gradient(
+            0deg,
+            transparent 0 42px,
+            rgba(255,255,255,.025) 43px
+        ),
+
+        repeating-linear-gradient(
+            90deg,
+            transparent 0 42px,
+            rgba(255,255,255,.025) 43px
+        );
+}
+
+.map::before {
+    content: "";
+
+    position: absolute;
+
+    left: 16%;
+    right: 16%;
+
+    top: 52%;
+
+    height: 1px;
+
+    background:
+        linear-gradient(
+            90deg,
+            transparent,
+            #e9a9bd,
+            transparent
+        );
+
+    transform: rotate(-8deg);
+
+    box-shadow:
+        0 0 20px rgba(233,169,189,.4);
+}
+
+.pin {
+    position: absolute;
+
+    top: calc(52% - 7px);
+
+    width: 14px;
+    height: 14px;
+
+    border-radius: 50%;
+
+    background: #fff;
+
+    box-shadow:
+        0 0 0 8px rgba(239,148,175,.08),
+        0 0 30px #f09bb6;
+}
+
+.pin.left {
+    left: 16%;
+}
+
+.pin.right {
+    right: 16%;
+}
+
+.place {
+    position: absolute;
+
+    top: calc(52% + 28px);
+
+    font-size: 10px;
+
+    letter-spacing: 3px;
+
+    color: #bcaab2;
+}
+
+.place.left {
+    left: 12%;
+}
+
+.place.right {
+    right: 10%;
+}
+
+.distance-text {
+    margin-top: 35px;
+
+    font-family: var(--serif);
+
+    font-size: clamp(26px,4vw,45px);
+
+    color: #e3c8d2;
+}
+
+.distance-sub {
+    color: #92828a;
+
+    font-size: 12px;
+
+    letter-spacing: 1px;
+
+    margin-top: 10px;
+}
+
+/* =========================
+   OPEN WHEN
+========================= */
+
+.openwhen {
+    background: #0c080b;
+}
+
+.open-grid {
+    width: 100%;
+
+    max-width: 1000px;
+
+    margin-top: 60px;
+
+    display: grid;
+
+    grid-template-columns:
+        repeat(2,1fr);
+
+    gap: 14px;
+}
+
+.open-card {
+    min-height: 190px;
+
+    padding: 30px;
+
+    border:
+        1px solid var(--line);
+
+    border-radius: 12px;
+
+    background: var(--glass);
+
+    text-align: left;
+
+    cursor: pointer;
+
+    transition: .4s;
+
+    position: relative;
+
+    overflow: hidden;
+}
+
+.open-card:hover {
+    transform: translateY(-5px);
+
+    background:
+        rgba(255,255,255,.07);
+
+    border-color:
+        rgba(241,140,171,.25);
+}
+
+.open-card .mini {
+    font-size: 9px;
+
+    letter-spacing: 3px;
+
+    color: #9f7c8a;
+
+    text-transform: uppercase;
+}
+
+.open-card h3 {
+    font-family: var(--serif);
+
+    font-size: 31px;
+
+    font-weight: 400;
+
+    margin-top: 18px;
+}
+
+.open-card .tap {
+    position: absolute;
+
+    right: 25px;
+    bottom: 22px;
+
+    color: #6d5e66;
+
+    font-size: 9px;
+
+    letter-spacing: 2px;
+}
+
+/* =========================
+   MODAL
+========================= */
+
+.modal {
+    position: fixed;
+
+    inset: 0;
+
+    background:
+        rgba(4,2,5,.78);
+
+    backdrop-filter: blur(18px);
+
+    z-index: 5000;
+
+    display: none;
+
+    place-items: center;
+
+    padding: 25px;
+}
+
+.modal.show {
+    display: grid;
+}
+
+.modal-box {
+    max-width: 650px;
+
+    width: 100%;
+
+    padding: 55px;
+
+    border:
+        1px solid var(--line);
+
+    border-radius: 16px;
+
+    background: #110b11;
+
+    position: relative;
+}
+
+.close {
+    position: absolute;
+
+    right: 20px;
+    top: 18px;
+
+    background: none;
+
+    border: 0;
+
+    color: #a9979f;
+
+    font-size: 20px;
+
+    cursor: pointer;
+}
+
+.modal-box h3 {
+    font: 400 50px var(--serif);
+
+    margin-bottom: 20px;
+}
+
+.modal-box p {
+    color: #bcaeb5;
+
+    line-height: 1.9;
+
+    font-size: 15px;
+}
+
+/* =========================
+   LETTER
+========================= */
+
+.letter {
+    background:
+        linear-gradient(
+            #0b070a,
+            #09060b
+        );
+}
+
+.letter-shell {
+    width: min(850px,100%);
+
+    margin-top: 65px;
+}
+
+.paper {
+    padding: 75px clamp(30px,8vw,100px);
+
+    background:
+        linear-gradient(
+            135deg,
+            rgba(255,255,255,.055),
+            rgba(255,255,255,.018)
+        );
+
+    border:
+        1px solid var(--line);
+
+    position: relative;
+
+    border-radius: 4px;
+
+    box-shadow:
+        0 40px 100px rgba(0,0,0,.3);
+}
+
+.paper::before {
+    content: "";
+
+    position: absolute;
+
+    inset: 16px;
+
+    border:
+        1px solid rgba(255,255,255,.035);
+
+    pointer-events: none;
+}
+
+.letter-to {
+    font-size: 9px;
+
+    letter-spacing: 4px;
+
+    color: #9b7d88;
+
+    text-transform: uppercase;
+}
+
+.letter-body {
+    margin-top: 35px;
+
+    font:
+        400 clamp(21px,2.4vw,28px)/1.75
+        var(--serif);
+
+    color: #e2d2d8;
+}
+
+.signature {
+    margin-top: 45px;
+
+    text-align: right;
+
+    color: #df9fb6;
+
+    font:
+        italic 26px var(--serif);
+}
+
+/* =========================
+   CAKE
+========================= */
+
+.wish {
+    background:
+        radial-gradient(
+            circle at center,
+            rgba(120,37,70,.22),
+            transparent 45%
+        ),
+        #09060b;
+}
+
+.cake-area {
+    text-align: center;
+
+    margin-top: 55px;
+}
+
+.cake {
+    width: 220px;
+
+    height: 110px;
+
+    margin: 50px auto 0;
+
+    position: relative;
+
+    background:
+        linear-gradient(
+            #f2c4d2,
+            #d98ea9
+        );
+
+    border-radius:
+        15px 15px 24px 24px;
+
+    box-shadow:
+        0 30px 80px rgba(228,133,164,.18);
+}
+
+.cake::before {
+    content: "";
+
+    position: absolute;
+
+    left: 0;
+    right: 0;
+
+    top: -20px;
+
+    height: 40px;
+
+    border-radius: 50%;
+
+    background: #ffe5ec;
+}
+
+.cake::after {
+    content: "";
+
+    position: absolute;
+
+    left: 20px;
+    right: 20px;
+
+    top: 6px;
+
+    height: 18px;
+
+    border-radius: 50%;
+
+    background: #e8a9bc;
+}
+
+.candles {
+    position: absolute;
+
+    top: -80px;
+
+    left: 50%;
+
+    transform:
+        translateX(-50%);
+
+    display: flex;
+
+    gap: 16px;
+}
+
+.candle {
+    width: 10px;
+
+    height: 62px;
+
+    background:
+        repeating-linear-gradient(
+            45deg,
+            #fff 0 7px,
+            #e8a8bc 7px 14px
+        );
+
+    position: relative;
+
+    border-radius: 3px;
+}
+
+.flame {
+    position: absolute;
+
+    top: -23px;
+    left: 1px;
+
+    width: 8px;
+    height: 15px;
+
+    background: #ffd58c;
+
+    border-radius:
+        60% 40% 60% 40%;
+
+    filter:
+        drop-shadow(
+            0 0 8px #ffbf65
+        );
+
+    animation:
+        flicker .8s infinite alternate;
+}
+
+@keyframes flicker {
+    to {
+        transform:
+            scale(.75)
+            translateY(2px);
+    }
+}
+
+.wish-btn {
+    margin-top: 65px;
+
+    padding: 16px 32px;
+
+    border-radius: 100px;
+
+    border:
+        1px solid var(--line);
+
+    background: var(--glass);
+
+    color: #fff;
+
+    cursor: pointer;
+
+    letter-spacing: 2px;
+
+    font-size: 10px;
+}
+
+.wish-result {
+    margin-top: 35px;
+
+    font:
+        400 35px var(--serif);
+
+    color: #e6bdcb;
+
+    min-height: 45px;
+}
+
+/* =========================
+   FINAL
+========================= */
+
+.final {
+    min-height: 100svh;
+
+    background:
+        radial-gradient(
+            circle at center,
+            rgba(165,48,91,.25),
+            transparent 36%
+        ),
+        #080509;
+
+    text-align: center;
+}
+
+.final-number {
+    font:
+        300 clamp(130px,27vw,300px)/.65
+        var(--serif);
+
+    color: rgba(255,255,255,.045);
+
+    position: absolute;
+}
+
+.final-content {
+    position: relative;
+
+    z-index: 2;
+}
+
+.final h2 {
+    font:
+        400 clamp(62px,10vw,135px)/.8
+        var(--serif);
+}
+
+.final h2 em {
+    color: #e3a0b7;
+}
+
+.final p {
+    max-width: 570px;
+
+    margin: 35px auto 0;
+
+    color: #b8aab1;
+
+    line-height: 1.9;
+
+    font-size: 14px;
+}
+
+.final-secret {
+    margin-top: 50px;
+
+    padding: 17px 35px;
+
+    border:
+        1px solid rgba(255,255,255,.2);
+
+    background: #fff;
+
+    color: #160b11;
+
+    border-radius: 100px;
+
+    cursor: pointer;
+
+    font-size: 10px;
+
+    letter-spacing: 3px;
+
+    transition: .35s;
+}
+
+.final-secret:hover {
+    transform: scale(1.04);
+
+    box-shadow:
+        0 15px 70px rgba(241,140,171,.25);
+}
+
+/* =========================
+   SPARKS
+========================= */
+
+.spark {
+    position: fixed;
+
+    width: 7px;
+    height: 7px;
+
+    border-radius: 50%;
+
+    background: #ffd8e5;
+
+    pointer-events: none;
+
+    z-index: 9000;
+
+    animation:
+        burst 1.3s ease-out forwards;
+}
+
+@keyframes burst {
+    to {
+        transform:
+            translate(
+                var(--tx),
+                var(--ty)
+            )
+            scale(0);
+
+        opacity: 0;
+    }
+}
+
+/* =========================
+   MOBILE
+========================= */
+
+@media(max-width:800px) {
+
+    section {
+        padding:
+            105px 5%;
+    }
+
+    .memory-wrap {
+        grid-template-columns: 1fr;
+    }
+
+    .photo {
+        min-height: 430px;
+    }
+
+    .photo.small {
+        min-height: 300px;
+    }
+
+    .reason-stage {
+        grid-template-columns: 1fr;
+    }
+
+    .reason-nav {
+        flex-direction: row;
+
+        overflow-x: auto;
+
+        max-height: none;
+    }
+
+    .reason-nav button {
+        white-space: nowrap;
+    }
+
+    .reason-card {
+        min-height: 470px;
+
+        padding: 35px;
+    }
+
+    .reason-num {
+        font-size: 90px;
+    }
+
+    .open-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .map {
+        height: 300px;
+    }
+
+    .paper {
+        padding: 55px 30px;
+    }
+}
+</style>
+</head>
+
+
+<body class="lock">
+
+<div class="noise"></div>
+
+<div id="particles"></div>
+
+
+<!-- =========================
+     INTRO
+========================= -->
+
+<div class="intro" id="intro">
+
+    <div class="intro-inner">
+
+        <div class="kicker">
+            made by Prabesh · with loveeeeeee
+        </div>
+
+        <div class="big21">
+            21
+        </div>
+
+        <div class="intro-sub">
+            for the girl who has my heart
+        </div>
+
+        <button
+            class="enter"
+            onclick="begin()">
+
+            ENTER YOUR BIRTHDAY
+
+        </button>
+
+    </div>
+
+</div>
+
+
+<!-- =========================
+     TOP BAR
+========================= -->
+
+<header class="topbar">
+
+    <div class="brand">
+        ♡
+    </div>
+
+    <div class="topdate">
+        OCTOBER 16 · 2026
+    </div>
+
+    <button
+        class="music"
+        onclick="toggleMusic()"
+        id="musicBtn">
+
+        ♪
+
+    </button>
+
+</header>
+
+
+<!-- OPTIONAL MUSIC -->
+
+<audio id="music" loop>
+
+    <source
+        src="song.mp3"
+        type="audio/mpeg">
+
+</audio>
+
+
+<main>
+
+
+<!-- =========================
+     HERO
+========================= -->
+
+<section class="hero">
+
+    <div class="orbit"></div>
+
+    <div class="orbit orbit2"></div>
+
+    <div class="hero-content reveal">
+
+        <div class="hero-eyebrow">
+            today is about you
+        </div>
+
+        <h1 class="hero-title">
+
+            Happy
+            <em>21st</em>
+
+            <br>
+            <br>
+
+            birthday Sano.
+
+        </h1>
+
+        <p class="hero-copy">
+
+           Even though You are somewhere in Australia,
+            I'm somewhere in Nepal,
+            and somehow the distance still
+            isn't big enough to stop me from
+            making this little corner of the
+            internet yours.
+
+        </p>
+
+    </div>
+
+
+    <div class="down">
+
+        <span></span>
+
+        SCROLL SLOWLY
+
+        <span></span>
+
+    </div>
+
+</section>
+
+
+<!-- =========================
+     INTRODUCTION
+========================= -->
+
+<section class="chapter">
+
+    <div class="reveal">
+
+        <div class="eyebrow">
+            01 · before we begin
+        </div>
+
+        <h2 class="title">
+
+            This isn't
+            <br>
+            a website.
+
+        </h2>
+
+        <p class="lead">
+
+            It's a tiny place I made for you —
+            filled with things I can't physically
+            give you today.
+
+            Memories.
+
+            Words.
+
+            Little promises.
+
+            And a reminder that even when
+            we're far apart, you are never
+            far from my thoughts.
+
+        </p>
+
+    </div>
+
+</section>
+
+
+<!-- =========================
+     MEMORIES
+========================= -->
+
+<section class="memories">
+
+    <div
+        class="reveal"
+        style="width:100%;text-align:center">
+
+        <div class="eyebrow">
+            02 · pieces of us
+        </div>
+
+        <h2 class="title">
+
+            A few moments
+            <br>
+            I would replay.
+
+        </h2>
+
+        <p class="lead">
+
+            
+
+        </p>
+
+
+        <div class="memory-wrap">
+
+
+            <div class="photo">
+
+                <img
+                    src="photo1.jpg.jpeg"
+                    alt="Our memory">
+
+                <div class="photo-label">
+
+                    <small>
+                        memory 01
+                    </small>
+
+                    <strong>
+                        Our First Official meet.
+                    </strong>
+
+                </div>
+
+            </div>
+
+
+            <div class="right-photos">
+
+
+                <div class="photo small">
+
+                    <img
+                        src="photo2.jpg.jpeg"
+                        alt="Our memory">
+
+                    <div class="photo-label">
+
+                        <small>
+                            memory 02
+                        </small>
+
+                        <strong>
+                            One of my favourites.
+                        </strong>
+
+                    </div>
+
+                </div>
+
+
+                <div class="photo small">
+
+                    <img
+                        src="photo3.jpg.jpeg"
+                        alt="Our memory">
+
+                    <div class="photo-label">
+
+                        <small>
+                            memory 03
+                        </small>
+
+                        <strong>
+                            Just us.
+                        </strong>
+
+                    </div>
+
+                </div>
+
+
+            </div>
+
+        </div>
+
+
+        <div
+            class="photo"
+            style="margin-top:18px;min-height:300px">
+
+            <img
+                src="photo4.jpg.jpeg"
+                alt="Our memory">
+
+            <div class="photo-label">
+
+                <small>
+                    memory 04
+                </small>
+
+                <strong>
+                    And there are so many more.
+                </strong>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- =========================
+     21 REASONS
+========================= -->
+
+<section class="reasons">
+
+    <div class="reason-head reveal">
+
+        <div class="eyebrow">
+            03 · because 21 deserves 21
+        </div>
+
+        <h2 class="title">
+
+            Twenty-one
+            <br>
+            little reasons.
+
+        </h2>
+
+        <p class="lead">
+
+            Click through them one by one.
+
+        </p>
+
+    </div>
+
+
+    <div class="reason-stage reveal">
+
+
+        <div
+            class="reason-nav"
+            id="reasonNav">
+        </div>
+
+
+        <div class="reason-card">
+
+
+            <div
+                class="reason-num"
+                id="reasonNum">
+
+                01
+
+            </div>
+
+
+            <div>
+
+                <h3 id="reasonTitle">
+                    Your smile.
+                </h3>
+
+                <p id="reasonText">
+
+                    Because somehow it can
+                    fix a day that you didn't
+                    even know was broken.
+
+                </p>
+
+            </div>
+
+
+            <div class="reason-progress">
+
+                <span id="reasonBar"></span>
+
+            </div>
+
+        </div>
+
+
+    </div>
+
+</section>
+
+
+<!-- =========================
+     DISTANCE
+========================= -->
+
+<section class="distance">
+
+    <div class="distance-inner reveal">
+
+
+        <div class="eyebrow">
+            04 · a little geography
+        </div>
+
+
+        <h2 class="title">
+
+            Different countries.
+            <br>
+            Same heart.
+
+        </h2>
+
+
+        <p class="lead">
+
+            The map is big.
+
+            What I feel for you isn't.
+
+        </p>
+
+
+        <div class="map">
+
+
+            <div class="pin left"></div>
+
+            <div class="pin right"></div>
+
+
+            <div class="place left">
+                NEPAL
+            </div>
+
+            <div class="place right">
+                AUSTRALIA
+            </div>
+
+
+        </div>
+
+
+        <div class="distance-text">
+
+            Some distances are measured
+            in kilometres.
+
+            <br>
+
+            Ours is measured in
+            “when will I see you again?”
+
+        </div>
+
+
+        <div class="distance-sub">
+
+            and the answer is:
+            hopefully sooner than we think.
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- =========================
+     OPEN WHEN
+========================= -->
+
+<section class="openwhen">
+
+    <div
+        class="reveal"
+        style="width:100%;text-align:center">
+
+
+        <div class="eyebrow">
+            05 · for later
+        </div>
+
+
+        <h2 class="title">
+            Open when...
+        </h2>
+
+
+        <p class="lead">
+
+            Four tiny messages
+            for four different versions of you.
+
+        </p>
+
+
+        <div class="open-grid">
+
+
+            <div
+                class="open-card"
+                onclick="openModal(0)">
+
+                <div class="mini">
+                    open when
+                </div>
+
+                <h3>
+                    you miss me.
+                </h3>
+
+                <div class="tap">
+                    TAP TO OPEN →
+                </div>
+
+            </div>
+
+
+            <div
+                class="open-card"
+                onclick="openModal(1)">
+
+                <div class="mini">
+                    open when
+                </div>
+
+                <h3>
+                    you've had a bad day.
+                </h3>
+
+                <div class="tap">
+                    TAP TO OPEN →
+                </div>
+
+            </div>
+
+
+            <div
+                class="open-card"
+                onclick="openModal(2)">
+
+                <div class="mini">
+                    open when
+                </div>
+
+                <h3>
+                    you doubt yourself.
+                </h3>
+
+                <div class="tap">
+                    TAP TO OPEN →
+                </div>
+
+            </div>
+
+
+            <div
+                class="open-card"
+                onclick="openModal(3)">
+
+                <div class="mini">
+                    open when
+                </div>
+
+                <h3>
+                    you need a reason to smile.
+                </h3>
+
+                <div class="tap">
+                    TAP TO OPEN →
+                </div>
+
+            </div>
+
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- =========================
+     LETTER
+========================= -->
+
+<section class="letter">
+
+    <div
+        class="reveal"
+        style="width:100%;text-align:center">
+
+
+        <div class="eyebrow">
+            06 · no screen can replace this
+        </div>
+
+
+        <h2 class="title">
+
+            A letter
+            <br>
+            from me to you.
+
+        </h2>
+
+
+        <div class="letter-shell">
+
+
+            <div class="paper">
+
+
+                <div class="letter-to">
+
+                    dear KHUSOOOO,
+
+                </div>
+
+
+                <div class="letter-body">
+
+                    I wish I could be there today.
+
+                    I wish I could see your face
+                    when you wake up, give you a hug,
+                    annoy you in person, and probably
+                    steal a piece of your cake.
+
+                    <br><br>
+
+                    But until distance stops being
+                    a part of our story, I want you
+                    to know something simple:
+
+                    <br><br>
+
+                    You matter a lottttttttttttttttt
+
+                    <br><br>
+
+                    Herda herdai mero fuchi panii 21 barsaki vainnnn😂
+                    ek matra chij sanu fankina chai kam garaaaaa hussssssss😭😭😭
+                    I loveeeeeeyouuuuuuuuuuu sooooooo much sanoooooooo😭😭❤️❤️❤️
+
+                    I hope, this year gives you
+                    everything you quietly wish for,
+                    even the things you haven't told
+                    anyone about yet.
+
+                    <br><br>
+
+                    And selfishly, I hope I get
+                    to be there for rest of the
+                    chapters that comes after this one.
+
+                    <br><br>
+
+                    Happy 21st, my love.
+
+
+                    <div class="signature">
+
+                        — yours, always ♡
+
+                    </div>
+
+                </div>
+
+
+            </div>
+
+        </div>
+
+
+    </div>
+
+</section>
+
+
+<!-- =========================
+     CAKE
+========================= -->
+
+<section class="wish">
+
+    <div
+        class="reveal"
+        style="text-align:center">
+
+
+        <div class="eyebrow">
+            07 · make a wish
+        </div>
+
+
+        <h2 class="title">
+
+            Twenty-one candles.
+            <br>
+            One wish.
+
+        </h2>
+
+
+        <p class="lead">
+
+            Take a breath.
+
+            Close your eyes.
+
+            Then press the button.
+
+        </p>
+<br>
+<br>
+<br>
+
+        <div class="cake-area">
+
+
+            <div class="cake">
+
+
+                <div class="candles">
+
+
+                    <div class="candle">
+
+                        <div class="flame"></div>
+
+                    </div>
+
+
+                    <div class="candle">
+
+                        <div class="flame"></div>
+
+                    </div>
+
+
+                    <div class="candle">
+
+                        <div class="flame"></div>
+
+                    </div>
+
+
+                </div>
+
+
+            </div>
+
+
+            <button
+                class="wish-btn"
+                onclick="makeWish()">
+
+                I MADE MY WISH ✨
+
+            </button>
+
+
+            <div
+                class="wish-result"
+                id="wishResult">
+            </div>
+
+
+        </div>
+
+
+    </div>
+
+</section>
+
+
+<!-- =========================
+     FINAL
+========================= -->
+
+<section class="final">
+
+
+    <div class="final-number">
+        21
+    </div>
+
+
+    <div class="final-content reveal">
+
+
+        <div class="eyebrow">
+            the last page
+        </div>
+
+
+        <h2>
+
+            Happy
+            <em>21st</em>,
+
+            <br>
+
+            my love.
+
+        </h2>
+
+
+        <p>
+
+            If I could give you one thing today,
+            it would be the ability to see yourself
+            through my eyes for one minute.
+
+            Maybe then you'd understand why
+            I made all of this.
+
+            <br><br>
+
+            Distance is temporary.
+
+            This birthday is not.
+
+            And the memories we haven't made yet
+            are waiting for us soooooo baddddd sano
+
+        </p>
+
+
+        <button
+            class="final-secret"
+            onclick="finale()">
+
+            ONE LAST THING ♡
+
+        </button>
+
+
+    </div>
+
+
+</section>
+
+
+</main>
+
+
+<!-- =========================
+     MODAL
+========================= -->
+
+<div
+    class="modal"
+    id="modal">
+
+
+    <div class="modal-box">
+
+
+        <button
+            class="close"
+            onclick="closeModal()">
+
+            ×
+
+        </button>
+
+
+        <div
+            class="eyebrow"
+            id="modalEyebrow">
+
+            open when
+
+        </div>
+
+
+        <h3 id="modalTitle"></h3>
+
+
+        <p id="modalText"></p>
+
+
+    </div>
+
+</div>
+
+
+<script>
+
+/* =========================
+   21 REASONS
+========================= */
+
+const reasons = [
+
+[
+"Your smile.",
+"I crave for my bebu ko smile a lottt because somehow it can fix a day that you didn't even know was broken."
+],
+
+[
+"The way you care.",
+"You care deeply, even when you pretend you don't."
+],
+
+[
+"Your little habits.",
+"Things you probably don't notice became things I secretly look forward to."
+],
+
+[
+"Your voice.",
+"There are days when hearing you is enough to make everything feel normal again."
+],
+
+[
+"Your honesty.",
+"I never want you to feel like you have to be anyone else around me."
+],
+
+[
+"Your ambition.",
+"I love watching you chase the things you want."
+],
+
+[
+"Your laugh.",
+"Especially the real one — the one you can't control."
+],
+
+[
+"Your patience.",
+"Patience ta testai ho khuso ko tara You've tolerated a lot from me. sorry for all the things that happens unintentionally yet, tme fankuuuuuuuuu bhaihalcheu huhu, thankyouuuuu for being there sanooooo."
+],
+
+[
+"Your softness.",
+"There is something beautiful about the way you love."
+],
+
+[
+"Our stupid conversations.",
+"Some of my favourite memories are literally us talking about nothing."
+],
+
+[
+"Your strength.",
+"You handle more than people realise."
+],
+
+[
+"Your eyes.",
+"I could get lost there and still call it a good day."
+],
+
+[
+"Your weird side.",
+"Please never become normal. I like this version, risauna ra fankina chai please kam garaaaaaa hussssss khuso😭."
+],
+
+[
+"Your support.",
+"I cannot thankyouuuu enough for your unwavering support mero khushoooooooooooo😭."
+],
+
+[
+"The way you make me laugh.",
+"Sometimes without even trying."
+],
+
+[
+"The comfort.",
+"With you, silence doesn't feel awkward."
+],
+
+[
+"The memories.",
+"we coudlnt create that much memories sanu tara ,I wouldn't trade what we've already had for anything."
+],
+
+[
+"The future.",
+"I love knowing there are still so many firsts waiting for us."
+],
+
+[
+"The distance.",
+"Even this taught me how much someone can matter."
+],
+
+[
+"The choice.",
+"After everythingggggggggg, I still choose you."
+],
+
+[
+"You.",
+"No explanation. Just you. And somehow, that's my favourite reason."
+]
+
+];
+
+
+const nav =
+document.getElementById("reasonNav");
+
+const num =
+document.getElementById("reasonNum");
+
+const title =
+document.getElementById("reasonTitle");
+
+const text =
+document.getElementById("reasonText");
+
+const bar =
+document.getElementById("reasonBar");
+
+
+reasons.forEach((r,i)=>{
+
+    const b =
+    document.createElement("button");
+
+    b.textContent =
+        String(i+1).padStart(2,"0")
+        + "  "
+        + r[0];
+
+    b.onclick =
+        () => showReason(i);
+
+    nav.appendChild(b);
+
+});
+
+
+function showReason(i){
+
+    [...nav.children].forEach(
+        (b,j)=>
+        b.classList.toggle(
+            "active",
+            j === i
+        )
+    );
+
+    num.textContent =
+        String(i+1).padStart(2,"0");
+
+    title.textContent =
+        reasons[i][0];
+
+    text.textContent =
+        reasons[i][1];
+
+    bar.style.width =
+        ((i+1)/21*100) + "%";
+}
+
+
+showReason(0);
+
+
+/* =========================
+   OPEN WHEN
+========================= */
+
+const modalData = [
+
+[
+"open when",
+"you miss me.",
+"Close your eyes for a second. I'm probably somewhere looking at my phone too, wishing I could be there. Until then, remember: being far away doesn't make you less loved."
+],
+
+[
+"open when",
+"you've had a bad day.",
+"You don't have to be strong every second. Have your food, take a breath, complain about everything if you need to — and remember tomorrow gets another chance."
+],
+
+[
+"open when",
+"you doubt yourself.",
+"I wish you could borrow my eyes for a minute. You would see someone capable, beautiful, strong and worth believing in. Please don't be harder on yourself than you would be on me."
+],
+
+[
+"open when",
+"you need a reason to smile.",
+"Because somewhere in Nepal, your favourite idiot spent way too much time making a website just to make you smile. That has to count for something. ❤️"
+]
+
+];
+
+
+function openModal(i){
+
+    document.getElementById(
+        "modalEyebrow"
+    ).textContent =
+        modalData[i][0];
+
+    document.getElementById(
+        "modalTitle"
+    ).textContent =
+        modalData[i][1];
+
+    document.getElementById(
+        "modalText"
+    ).textContent =
+        modalData[i][2];
+
+    document.getElementById(
+        "modal"
+    ).classList.add("show");
+}
+
+
+function closeModal(){
+
+    document.getElementById(
+        "modal"
+    ).classList.remove("show");
+
+}
+
+
+document.getElementById(
+    "modal"
+).addEventListener(
+    "click",
+    e => {
+
+        if(
+            e.target.id === "modal"
+        ){
+
+            closeModal();
+
+        }
+
+    }
+);
+
+
+/* =========================
+   ENTER
+========================= */
+
+function begin(){
+
+    document
+        .getElementById("intro")
+        .classList.add("out");
+
+    document
+        .body
+        .classList.remove("lock");
+
+    const music =
+        document.getElementById("music");
+
+    music.play().catch(()=>{});
+
+}
+
+
+/* =========================
+   MUSIC
+========================= */
+
+let playing = false;
+
+
+function toggleMusic(){
+
+    const music =
+        document.getElementById("music");
+
+    const button =
+        document.getElementById("musicBtn");
+
+
+    if(!playing){
+
+        music.play();
+
+        button.innerHTML =
+            "Ⅱ";
+
+        playing = true;
+
+    }
+
+    else{
+
+        music.pause();
+
+        button.innerHTML =
+            "♪";
+
+        playing = false;
+
+    }
+
+}
+
+
+/* =========================
+   PARTICLES
+========================= */
+
+function particles(){
+
+    const wrap =
+        document.getElementById(
+            "particles"
+        );
+
+
+    for(
+        let i=0;
+        i<28;
+        i++
+    ){
+
+        const p =
+            document.createElement(
+                "div"
+            );
+
+        p.className =
+            "particle";
+
+
+        const s =
+            1 + Math.random()*3;
+
+
+        p.style.width =
+            s+"px";
+
+        p.style.height =
+            s+"px";
+
+
+        p.style.left =
+            Math.random()*100+"%";
+
+
+        p.style.top =
+            (60+Math.random()*50)+"%";
+
+
+        p.style.setProperty(
+            "--x",
+            (Math.random()*180-90)+"px"
+        );
+
+
+        p.style.animationDuration =
+            (9+Math.random()*13)+"s";
+
+
+        p.style.animationDelay =
+            (-Math.random()*15)+"s";
+
+
+        wrap.appendChild(p);
+
+    }
+
+}
+
+
+particles();
+
+
+/* =========================
+   SCROLL REVEAL
+========================= */
+
+const observer =
+new IntersectionObserver(
+
+    entries => {
+
+        entries.forEach(e => {
+
+            if(e.isIntersecting){
+
+                e.target.classList.add(
+                    "show"
+                );
+
+            }
+
+        });
+
+    },
+
+    {
+        threshold:.15
+    }
+
+);
+
+
+document
+    .querySelectorAll(".reveal")
+    .forEach(
+        el => observer.observe(el)
+    );
+
+
+/* =========================
+   BIRTHDAY WISH
+========================= */
+
+function makeWish(){
+
+    document
+        .querySelectorAll(".flame")
+        .forEach(
+            f => f.style.display =
+                "none"
+        );
+
+
+    document.getElementById(
+        "wishResult"
+    ).innerHTML =
+        "May this year be kinder to you than the last. ♡";
+
+
+    burst(
+        window.innerWidth/2,
+        window.innerHeight/2
+    );
+
+}
+
+
+/* =========================
+   PARTICLE EXPLOSION
+========================= */
+
+function burst(x,y){
+
+    for(
+        let i=0;
+        i<75;
+        i++
+    ){
+
+        const s =
+            document.createElement(
+                "div"
+            );
+
+        s.className =
+            "spark";
+
+
+        s.style.left =
+            x+"px";
+
+        s.style.top =
+            y+"px";
+
+
+        const angle =
+            Math.random()*Math.PI*2;
+
+
+        const distance =
+            80+Math.random()*330;
+
+
+        s.style.setProperty(
+            "--tx",
+            Math.cos(angle)*distance+"px"
+        );
+
+
+        s.style.setProperty(
+            "--ty",
+            Math.sin(angle)*distance+"px"
+        );
+
+
+        document.body.appendChild(s);
+
+
+        setTimeout(
+            () => s.remove(),
+            1400
+        );
+
+    }
+
+}
+
+
+/* =========================
+   FINAL SECRET
+========================= */
+
+function finale(){
+
+    burst(
+        innerWidth/2,
+        innerHeight/2
+    );
+
+
+    setTimeout(()=>{
+
+        document.body.insertAdjacentHTML(
+
+            "beforeend",
+
+            `
+
+            <div
+                id="finalOverlay"
+                style="
+
+                    position:fixed;
+                    inset:0;
+                    z-index:8000;
+
+                    display:grid;
+                    place-items:center;
+
+                    background:
+                    rgba(5,3,6,.96);
+
+                    text-align:center;
+
+                    padding:25px;
+
+                    animation:fadeIn .7s ease;
+
+                "
+            >
+
+                <div>
+
+
+                    <div
+                        style="
+                        font:10px var(--sans);
+                        letter-spacing:5px;
+                        color:#a98794;
+                        text-transform:uppercase;
+                        "
+                    >
+
+                        from Prabesh,
+                        with all my love
+
+                    </div>
+
+
+                    <div
+                        style="
+                        font:
+                        400 clamp(55px,9vw,110px)/.9
+                        var(--serif);
+
+                        margin-top:25px;
+                        "
+                    >
+
+                        Until I can say it
+
+                        <br>
+
+                        <em
+                            style="color:#e5a3b9"
+                        >
+
+                            beside you.
+
+                        </em>
+
+                    </div>
+
+
+                    <div
+                        style="
+                        color:#bcaeb5;
+                        line-height:1.9;
+                        max-width:550px;
+                        margin:30px auto 0;
+                        "
+                    >
+
+                        Happy 21st, baby.
+
+                        <br>
+
+                        I hope you felt loved today.
+
+                    </div>
+
+
+                    <button
+                        onclick="
+                        document
+                        .getElementById(
+                        'finalOverlay'
+                        )
+                        .remove()
+                        "
+                        style="
+                        margin-top:40px;
+                        padding:14px 28px;
+                        border-radius:100px;
+                        border:1px solid #3b2931;
+                        background:transparent;
+                        color:white;
+                        cursor:pointer;
+                        "
+                    >
+
+                        Keep this little secret ♡
+
+                    </button>
+
+
+                </div>
+
+            </div>
+
+            `
+
+        );
+
+    },450);
+
+}
+
+</script>
+
+</body>
+</html>
